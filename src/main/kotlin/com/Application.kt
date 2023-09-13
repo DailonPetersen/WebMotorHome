@@ -1,6 +1,9 @@
 package com
 
+import com.di.ModulesInjection
+import com.di.ModulesKoinInjection
 import com.plugins.*
+import com.routes.motorhome.MotorHomeRoutes.configureMotorHomeRoutes
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -11,9 +14,8 @@ fun main(args: Array<String>) {
 }
 
 fun Application.function() {
-    configureSerialization()
-    configureDatabases()
+    Databases.init()
+    ModulesKoinInjection.init()
     configureSwagger()
-    //configureSecurity()
-    configureRouting()
+    configureMotorHomeRoutes()
 }
