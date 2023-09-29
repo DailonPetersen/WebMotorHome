@@ -1,7 +1,7 @@
-package com.routes.motorhome
+package com.routes.controllers
 
 import com.data.MotorHome
-import com.database.dao.motorhome.DAOMotorHomeFacadeImpl
+import com.database.dao.implementations.DAOMotorhomeInterfaceImpl
 import io.ktor.http.*
 import io.ktor.server.util.*
 import kotlinx.coroutines.runBlocking
@@ -9,7 +9,7 @@ import org.koin.core.component.KoinComponent
 
 class MotorhomeController: MotohomeControllerInterface, KoinComponent {
 
-    private val dbMotorHome = DAOMotorHomeFacadeImpl().apply {
+    private val dbMotorHome = DAOMotorhomeInterfaceImpl().apply {
         runBlocking {
             if (this@apply.getAll().isEmpty()) {
                 insert(MotorHome(null, "kombi", "descricao", 1998, false, 4))

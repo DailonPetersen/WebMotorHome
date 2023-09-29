@@ -1,14 +1,9 @@
 package com.plugins
 
-import com.data.MotorHomes
-import com.data.TempTable
-import io.ktor.server.application.*
-import kotlinx.coroutines.CoroutineScope
+import com.data.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -16,7 +11,7 @@ object Databases {
     fun init() {
         val database = connectToSQLite()
         transaction(database) {
-            SchemaUtils.create(MotorHomes)
+            SchemaUtils.create(MotorHomes, Usuarios, Pedidos, Fabricas, Anuncios, Disponibilidades)
         }
     }
 

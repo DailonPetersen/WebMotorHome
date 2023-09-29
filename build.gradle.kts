@@ -59,4 +59,7 @@ dependencies {
 
     //DI
     implementation ("io.insert-koin:koin-ktor:$koinVersion")
+
+    //Cripty
+    implementation("at.favre.lib:bcrypt:0.9.0")
 }
