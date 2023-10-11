@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.profile.CompleteProfileFragment"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <ScrollView
+        android:id="@+id/scrollViewPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15sp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:id="@id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/optionsLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="NestedScrolling">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="40sp"
+                        android:text="Preencha os dados do anuncio"
+                        android:textAppearance="@style/Theme.WebMotorHomeApp.titles" />
+
+                    <EditText
+                        android:id="@+id/modelo"
+                        style="@style/Theme.WebMotorHomeApp.inputs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="Modelo do veiculo"
+                        android:hint="Modelo do veiculo"
+                        android:inputType="text" />
+
+                    <EditText
+                        android:id="@+id/fabricante"
+                        style="@style/Theme.WebMotorHomeApp.inputs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="Fabricante"
+                        android:hint="Fabricante"
+                        android:inputType="text" />
+
+                    <EditText
+                        android:id="@+id/preco"
+                        style="@style/Theme.WebMotorHomeApp.inputs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="Preço"
+                        android:hint="Preço"
+                        android:inputType="text" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/ano"
+                            style="@style/Theme.WebMotorHomeApp.inputs"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10sp"
+                            android:layout_weight="1"
+                            android:autofillHints="Ano"
+                            android:hint="Ano"
+                            android:inputType="text" />
+
+                        <EditText
+                            android:id="@+id/placa"
+                            style="@style/Theme.WebMotorHomeApp.inputs"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:autofillHints="Placa"
+                            android:hint="Placa"
+                            android:inputType="" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/descricao"
+                        style="@style/Theme.WebMotorHomeApp.inputs"
+                        android:layout_width="match_parent"
+                        android:layout_height="100sp"
+                        android:autofillHints="Descricao"
+                        android:hint="Descricao"
+                        android:inputType="text" />
+                </LinearLayout>
+            </ScrollView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/optionsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="10sp"
+                app:layout_constraintBottom_toTopOf="@id/carouselLayout"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView">
+
+                <RadioButton
+                    android:id="@+id/radioButtonDisponibilidade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25sp"
+                    android:background="@drawable/rounded_yellow_rec"
+                    android:padding="2sp"
+                    android:pointerIcon="hand"
+                    android:text="Disponivel para exposição"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30sp"
+                    android:layout_marginTop="5sp"
+                    android:background="@drawable/rounded_gray_rec"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:paddingHorizontal="5sp"
+                    android:text="Imagens"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:drawableStartCompat="@drawable/add_circle_outline_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioButtonDisponibilidade" />
+
+                <TextView
+                    android:id="@+id/textDisponibilidade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Disponibilidade"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioButton
+                    android:id="@+id/datePickerInicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20sp"
+                    android:background="@drawable/rounded_yellow_rec"
+                    android:paddingHorizontal="5sp"
+                    android:text="07/10/2023"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textDisponibilidade" />
+
+                <RadioButton
+                    android:id="@+id/datePickerFim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20sp"
+                    android:layout_marginTop="5sp"
+                    android:background="@drawable/rounded_yellow_rec"
+                    android:paddingHorizontal="5sp"
+                    android:text="07/10/2023"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/datePickerInicio" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/carouselLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/optionsLayout">
+
+                <TextView
+                    android:id="@+id/textCarouselTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pré-visualização das imagens"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.helper.widget.Carousel
+                    android:id="@+id/carousel"
+                    app:carousel_backwardTransition="@+id/back"
+                    android:layout_width="match_parent"
+                    android:layout_height="150sp"
+                    app:layout_constraintTop_toBottomOf="@id/textCarouselTitle"
+                    android:background="@color/black"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:id="@+id/buttonCriarConta"
+        android:layout_gravity="bottom"
+        android:layout_margin="15sp"
+        style="@style/Theme.WebMotorHomeApp.buttons" />
+</FrameLayout>

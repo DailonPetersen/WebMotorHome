@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.CreateAccountFormFragment"
+    android:background="#FFC700">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Theme.WebMotorHomeApp.titles"
+                android:text="Crie sua conta na WebMotor-Home’s"
+                android:layout_marginBottom="40sp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Theme.WebMotorHomeApp.inputs"
+                android:id="@+id/nameUser"
+                android:autofillHints="Primeiro nome"
+                android:hint="Primeiro nome"
+                android:inputType="text"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Theme.WebMotorHomeApp.inputs"
+                android:id="@+id/lastname"
+                android:autofillHints="Sobrenome"
+                android:hint="Sobrenome"
+                android:inputType="text"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/email"
+                android:autofillHints="E-mail"
+                android:hint="E-mail"
+                style="@style/Theme.WebMotorHomeApp.inputs"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/password"
+                android:autofillHints="Senha"
+                android:hint="Senha"
+                style="@style/Theme.WebMotorHomeApp.inputs"
+                android:inputType="numberPassword|textPassword"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/confirmPassword"
+                android:autofillHints="Confirme a senha"
+                android:hint="Confirme a senha"
+                style="@style/Theme.WebMotorHomeApp.inputs"
+                android:inputType="numberPassword|textPassword"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/orLine"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginVertical="20sp">
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10sp"
+                    android:text="OU"/>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:background="#CCCCCC"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Criar conta"
+                style="@style/Theme.WebMotorHomeApp.buttons"/>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="200sp"
+                android:src="@drawable/social_media_continue" />
+
+
+            <LinearLayout
+                android:id="@+id/jaPossuiConta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Já possui uma conta?"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clique para entrar"
+                    android:textStyle="bold"
+                    android:textColor="#FFC700"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

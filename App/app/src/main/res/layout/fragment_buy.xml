@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.buy.BuyFragment"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15sp">
+
+        <EditText
+            android:id="@+id/searchField"
+            style="@style/Theme.WebMotorHomeApp.inputs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_gray_rec"
+            android:drawableStart="@drawable/search_24"
+            android:hint="Digite o modelo ou marca"
+            android:paddingHorizontal="5sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/seachScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            app:layout_constraintTop_toBottomOf="@+id/searchField">
+
+            <LinearLayout
+                android:id="@+id/optionsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/precoButton"
+                    style="@style/Theme.WebMotorHomeApp.options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30sp"
+                    android:text="Preço" />
+
+                <RadioButton
+                    android:id="@+id/localizacaoButton"
+                    style="@style/Theme.WebMotorHomeApp.options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30sp"
+                    android:text="Localização" />
+
+                <RadioButton
+                    android:id="@+id/montadorasButton"
+                    style="@style/Theme.WebMotorHomeApp.options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30sp"
+                    android:text="Fabricante" />
+
+                <RadioButton
+                    android:id="@+id/lojasFabricasButton"
+                    style="@style/Theme.WebMotorHomeApp.options"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30sp"
+                    android:text="Lojas/Fábricas" />
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/anunciosResultadosLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seachScroll">
+
+            <TextView
+                android:id="@+id/textAnuncioResults"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Principais resultados"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

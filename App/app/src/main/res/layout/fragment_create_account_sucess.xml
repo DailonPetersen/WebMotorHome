@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.CreateAccountFormFragment"
+    android:background="#FFC700">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="100sp"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Theme.WebMotorHomeApp.titles"
+            android:text="Sua conta foi criada! Verifique seu email para continuar..."
+            android:layout_marginBottom="40sp"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200sp"
+            android:src="@drawable/account_sucess" />
+
+        <TextView
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:text="Sua conta foi criada! Verifique seu email para continuar..."
+            android:layout_marginBottom="40sp"/>
+
+        <Button
+            android:id="@+id/okSucessButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            style="@style/Theme.WebMotorHomeApp.buttons"/>
+
+    </LinearLayout>
+
+</FrameLayout>
