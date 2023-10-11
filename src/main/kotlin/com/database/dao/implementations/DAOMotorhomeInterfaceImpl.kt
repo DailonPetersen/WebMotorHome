@@ -1,13 +1,14 @@
-package com.database.dao.motorhome
+package com.database.dao.implementations
 
 import com.data.MotorHome
 import com.data.MotorHomes
+import com.database.dao.facades.DAOMotorHomeFacade
 import com.plugins.Databases.dbQuery
 import mu.KotlinLogging
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
-class DAOMotorHomeFacadeImpl : DAOMotorHomeFacade {
+class DAOMotorhomeInterfaceImpl : DAOMotorHomeFacade {
     private val logger = KotlinLogging.logger("MotorhomeRepository")
 
     private fun resultRowToMotorhome(row: ResultRow) = MotorHome(

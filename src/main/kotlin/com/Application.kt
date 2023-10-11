@@ -1,9 +1,12 @@
 package com
 
-import com.di.ModulesInjection
 import com.di.ModulesKoinInjection
 import com.plugins.*
-import com.routes.motorhome.MotorHomeRoutes.configureMotorHomeRoutes
+import com.routes.MotorHomeRoutes.configureMotorHomeRoutes
+import com.routes.AnuncioRoutes.configureAnuncioRoutes
+import com.routes.ChatRoutes.configureChatRoutes
+import com.routes.MessageRoutes.configureMessageRoutes
+import com.routes.UserRoutes.configureUserRoutes
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -18,4 +21,8 @@ fun Application.function() {
     ModulesKoinInjection.init()
     configureSwagger()
     configureMotorHomeRoutes()
+    configureUserRoutes()
+    configureAnuncioRoutes()
+    configureChatRoutes()
+    configureMessageRoutes()
 }

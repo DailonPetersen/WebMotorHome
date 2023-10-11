@@ -1,5 +1,6 @@
-package com.routes.motorhome
+package com.routes
 
+import com.routes.controllers.MotorhomeController
 import io.ktor.http.*
 import io.ktor.serialization.gson.*
 import io.ktor.server.application.*
@@ -16,7 +17,7 @@ import java.text.DateFormat
 object MotorHomeRoutes {
     private val logger = KotlinLogging.logger("MotorhomeRoutes")
 
-    val controller by inject<MotorhomeController>(MotorhomeController::class.java)
+    private val controller by inject<MotorhomeController>(MotorhomeController::class.java)
 
     fun Application.configureMotorHomeRoutes()  {
         install(ContentNegotiation) {
@@ -28,6 +29,7 @@ object MotorHomeRoutes {
         }
         install(StatusPages) {
             exception<Throwable> { call, cause ->
+
                 call.respondText("500: $cause ", status = HttpStatusCode.InternalServerError)
             }
         }

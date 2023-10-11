@@ -1,4 +1,4 @@
-package com.database.dao.motorhome
+package com.database.dao.facades
 
 import com.data.MotorHome
 import javax.swing.text.StyledEditorKit.BoldAction
