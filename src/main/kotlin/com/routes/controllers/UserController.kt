@@ -12,6 +12,8 @@ class UserController: KoinComponent {
 
     suspend fun getAll(): List<Usuario> = dbUser.getAll()
 
+    suspend fun getByEmail(email: String): Usuario? = dbUser.getByEmail(email)
+
     suspend fun user(id: Int): Usuario = dbUser.get(id) ?: throw NoSuchElementException()
 
     suspend fun editUser(item: Parameters, id: Int): Boolean {
@@ -19,6 +21,7 @@ class UserController: KoinComponent {
             nome = item.getOrFail("nome"),
             sobrenome = item.getOrFail("sobrenome"),
             email = item.getOrFail("email"),
+            password = item.getOrFail("password"),
             telefone = item.getOrFail("telefone")
         )
 
@@ -35,6 +38,7 @@ class UserController: KoinComponent {
             nome = item.getOrFail("nome"),
             sobrenome = item.getOrFail("sobrenome"),
             email = item.getOrFail("email"),
+            password = item.getOrFail("password"),
             telefone = item.getOrFail("telefone")
         )
 

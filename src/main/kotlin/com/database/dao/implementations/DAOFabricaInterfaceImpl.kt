@@ -35,7 +35,7 @@ class DAOFabricaInterfaceImpl : DAOFabricaInterface {
     }
 
     override suspend fun update(fabrica: Fabrica): Boolean = dbQuery {
-        Fabricas.update(where = { Fabricas.id eq fabrica.id}) {
+        Fabricas.update(where = { Fabricas.id eq fabrica.id as Int }) {
             it[idUser] = fabrica.idUser
             it[nomeFantasia] = fabrica.nomeFantasia
             it[razaoSocial] = fabrica.razaoSocial

@@ -43,6 +43,8 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+
     //Logging
     implementation("io.ktor:ktor-server-call-logging-jvm:2.3.4")
     implementation("io.github.microutils:kotlin-logging:2.0.12")

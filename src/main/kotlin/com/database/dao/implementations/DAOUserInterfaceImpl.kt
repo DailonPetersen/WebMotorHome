@@ -1,27 +1,33 @@
 package com.database.dao.implementations
 
-import com.data.MotorHomes
+import at.favre.lib.crypto.bcrypt.BCrypt
 import com.data.Usuario
 import com.data.Usuarios
+import com.database.dao.facades.DAOUsuarioFacade
 import com.plugins.Databases.dbQuery
 import mu.KotlinLogging
+import com.security.Encryptor.hashPassword
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import at.favre.lib.crypto.bcrypt.BCrypt
-import com.database.dao.facades.DAOUsuarioFacade
 import java.security.SecureRandom
-import java.util.Base64
+import java.util.*
 
 class DAOUserFacadeImpl: DAOUsuarioFacade {
 
     private val logger = KotlinLogging.logger("UserRepository")
 
     override suspend fun getAll(): List<Usuario> = dbQuery {
-        MotorHomes.selectAll().map { resultRowToUser(it) }
+        Usuarios.selectAll().map { resultRowToUser(it) }
     }
 
     override suspend fun get(id: Int): Usuario? = dbQuery {
         Usuarios.select { Usuarios.id eq id}
+            .map { resultRowToUser(it) }
+            .singleOrNull()
+    }
+
+    override suspend fun getByEmail(email: String): Usuario? = dbQuery {
+        Usuarios.select { Usuarios.email eq email }
             .map { resultRowToUser(it) }
             .singleOrNull()
     }
@@ -31,6 +37,7 @@ class DAOUserFacadeImpl: DAOUsuarioFacade {
             it[nome] = usuario.nome
             it[sobrenome] = usuario.sobrenome
             it[email] = usuario.email
+            it[password] = hashPassword(usuario.password)
             it[telefone] = usuario.telefone
         }
         statementInsert.resultedValues?.singleOrNull()?.let(::resultRowToUser)
@@ -41,6 +48,7 @@ class DAOUserFacadeImpl: DAOUsuarioFacade {
             it[nome] = usuario.nome
             it[sobrenome] = usuario.sobrenome
             it[email] = usuario.email
+            it[password] = usuario.password
             it[telefone] = usuario.telefone
         } > 0
     }
@@ -54,6 +62,7 @@ class DAOUserFacadeImpl: DAOUsuarioFacade {
         nome = row[Usuarios.nome],
         sobrenome = row[Usuarios.sobrenome],
         email = row[Usuarios.email],
+        password = row[Usuarios.password],
         telefone = row[Usuarios.telefone]
     )
 }

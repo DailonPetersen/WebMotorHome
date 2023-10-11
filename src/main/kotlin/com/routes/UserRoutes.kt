@@ -19,43 +19,46 @@ object UserRoutes {
 
     private val logger = KotlinLogging.logger("UserRoutes")
 
-    private val controller by KoinJavaComponent.inject<UserController>(UserController::class.java)
+    private val controller = UserController()
 
     fun Application.configureUserRoutes() {
 
         routing {
-            get("/users") {
-                call.respond(controller.getAll())
+            route("/users") {
+                get("/list") {
+                    call.respond(controller.getAll())
+                }
+
+                get ("/{id}") {
+                    val id = call.parameters.getOrFail("id").toInt()
+                    logger.debug("id $id id type: ${id.javaClass.simpleName}")
+                    call.respond(controller.user(id))
+                }
+
+                post ("/user") {
+                    val objectReceived = call.receiveParameters()
+                    val userInserted = controller.addNewUser(objectReceived)
+                    userInserted?.let {
+                        call.respondRedirect("us  ers/${it.id}")
+                    } ?: call.respond(HttpStatusCode.BadGateway)
+                }
+
+                put ("/user/list/{id}") {
+                    val objectReceived = call.receiveParameters()
+                    val id = call.parameters.getOrFail("id").toInt()
+
+                    if (controller.editUser(objectReceived, id)) call.respond(HttpStatusCode.OK)
+                    else call.respond(HttpStatusCode.BadRequest)
+                }
+
+                delete ("/user/{id}"){
+                    val id = call.parameters.getOrFail("id").toInt()
+
+                    if (controller.remove(id)) call.respond(HttpStatusCode.OK)
+                    else call.respond(HttpStatusCode.BadRequest)
+                }
             }
 
-            get ("/users/{id}") {
-                val id = call.parameters.getOrFail("id").toInt()
-                logger.debug("id $id id type: ${id.javaClass.simpleName}")
-                call.respond(controller.user(id))
-            }
-
-            post ("/user") {
-                val objectReceived = call.receiveParameters()
-                val userInserted = controller.addNewUser(objectReceived)
-                userInserted?.let {
-                    call.respondRedirect("users/${it.id}")
-                } ?: call.respond(HttpStatusCode.BadGateway)
-            }
-
-            put ("/user/{id}") {
-                val objectReceived = call.receiveParameters()
-                val id = call.parameters.getOrFail("id").toInt()
-
-                if (controller.editUser(objectReceived, id)) call.respond(HttpStatusCode.OK)
-                else call.respond(HttpStatusCode.BadRequest)
-            }
-
-            delete ("/user/{id}"){
-                val id = call.parameters.getOrFail("id").toInt()
-
-                if (controller.remove(id)) call.respond(HttpStatusCode.OK)
-                else call.respond(HttpStatusCode.BadRequest)
-            }
         }
     }
 }

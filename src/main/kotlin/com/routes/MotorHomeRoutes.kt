@@ -29,6 +29,7 @@ object MotorHomeRoutes {
         }
         install(StatusPages) {
             exception<Throwable> { call, cause ->
+
                 call.respondText("500: $cause ", status = HttpStatusCode.InternalServerError)
             }
         }

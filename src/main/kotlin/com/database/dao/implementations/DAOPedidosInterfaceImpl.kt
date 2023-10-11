@@ -33,7 +33,7 @@ class DAOPedidosInterfaceImpl: DAOPedidosInterface {
     }
 
     override suspend fun update(pedido: Pedido): Boolean = dbQuery {
-        Pedidos.update( {Pedidos.id eq pedido.id} ) {
+        Pedidos.update( {Pedidos.id eq pedido.id as Int } ) {
             it[idFabrica] = pedido.idFabrica
             it[idCliente] = pedido.idCliente
             it[descricao] = pedido.descricao

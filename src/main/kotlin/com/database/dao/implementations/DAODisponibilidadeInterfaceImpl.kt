@@ -26,15 +26,15 @@ class DAODisponibilidadeInterfaceImpl : DAODisponibilidadeInterface {
     override suspend fun insert(disponibilidade: Disponibilidade): Disponibilidade?  = dbQuery {
         val statement = Disponibilidades.insert {
             it[dataInicio] = disponibilidade.dataInicio
-            it[dataFim] = disponibilidade.dateFim
+            it[dataFim] = disponibilidade.dataFim
         }
         statement.resultedValues?.singleOrNull()?.let(::resultRowToDisponibilidade)
     }
 
     override suspend fun update(disponibilidade: Disponibilidade): Boolean = dbQuery {
-        Disponibilidades.update(where = { Disponibilidades.id eq disponibilidade.id}) {
+        Disponibilidades.update(where = { Disponibilidades.id eq disponibilidade.id as Int  }) {
             it[dataInicio] = disponibilidade.dataInicio
-            it[dataFim] = disponibilidade.dateFim
+            it[dataFim] = disponibilidade.dataFim
         } > 0
     }
 
@@ -45,6 +45,6 @@ class DAODisponibilidadeInterfaceImpl : DAODisponibilidadeInterface {
     private fun resultRowToDisponibilidade(row: ResultRow) = Disponibilidade(
         id = row[Disponibilidades.id],
         dataInicio = row[Disponibilidades.dataInicio],
-        dateFim = row[Disponibilidades.dataFim]
+        dataFim = row[Disponibilidades.dataFim]
     )
 }
