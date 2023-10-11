@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home"
+        android:actionLayout="@layout/fragment_home"/>
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/search_24"
+        android:title="@string/title_search"
+        android:actionLayout="@layout/fragment_buy"/>
+
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/chat_bubble_outline_24"
+        android:title="@string/title_chat" />
+
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/account_circle_24"
+        android:title="@string/title_my_account" />
+
+</menu>

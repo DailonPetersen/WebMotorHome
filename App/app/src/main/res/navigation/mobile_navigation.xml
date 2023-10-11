@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <action
+        android:id="@+id/action_navigation_to_homeFragment"
+        app:destination="@id/navigation_home" />
+
+    <action
+        android:id="@+id/action_navigation_to_navigation_rent_fragment"
+        app:destination="@id/navigation_rent_fragment" />
+    <action
+        android:id="@+id/action_navigation_to_navigation_buy_fragment"
+        app:destination="@id/navigation_buy_fragment" />
+    <action
+        android:id="@+id/action_navigation_to_navigation_sell_fragment"
+        app:destination="@id/navigation_sell_fragment" />
+    <action
+        android:id="@+id/action_navigation_to_baseTabFragment"
+        app:destination="@id/baseTabFragment" />
+    <action
+        android:id="@+id/action_navigation_to_myAccountFragment"
+        app:destination="@id/myAccountFragment" />
+    <action
+        android:id="@+id/action_navigation_to_chatFragment"
+        app:destination="@id/chatFragment" />
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.webmotorhomeapp.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_rent_fragment"
+            app:destination="@id/navigation_rent_fragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_buy_fragment"
+            app:destination="@id/navigation_buy_fragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_sell_fragment"
+            app:destination="@id/navigation_sell_fragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_baseTabFragment"
+            app:destination="@id/baseTabFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_myAccountFragment"
+            app:destination="@id/myAccountFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_sell_fragment"
+        android:name="com.example.webmotorhomeapp.ui.sell.SellFragment"
+        android:label="@string/title_sell"
+        tools:layout="@layout/fragment_sell"/>
+
+    <fragment
+        android:id="@+id/navigation_buy_fragment"
+        android:name="com.example.webmotorhomeapp.ui.buy.BuyFragment"
+        android:label="@string/title_buy"
+        tools:layout="@layout/fragment_buy" />
+
+    <fragment
+        android:id="@+id/navigation_rent_fragment"
+        android:name="com.example.webmotorhomeapp.ui.rent.RentFragment"
+        android:label="@string/title_rent"
+        tools:layout="@layout/fragment_to_rent" />
+    <fragment
+        android:id="@+id/baseTabFragment"
+        android:name="com.example.webmotorhomeapp.ui.BaseTabFragment"
+        android:label="BaseTabFragment" />
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="com.example.webmotorhomeapp.ui.profile.MyAccountFragment"
+        android:label="fragment_my_account"
+        tools:layout="@layout/fragment_my_account" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.webmotorhomeapp.ui.chats.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+</navigation>

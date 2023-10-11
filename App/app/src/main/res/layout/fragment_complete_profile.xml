@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.profile.CompleteProfileFragment"
+    android:orientation="vertical"
+    android:background="#FFC700">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bem vindo ao WebMotor-Home’s"
+        android:padding="15dp"
+        android:layout_marginTop="50dp"
+        android:textAppearance="@style/Theme.WebMotorHomeApp.titles.white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150sp"
+        android:padding="15dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@id/scrollView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/buttonCriarConta">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/Theme.WebMotorHomeApp.titles"
+                    android:text="Crie sua conta na WebMotor-Home’s"
+                    android:layout_marginBottom="40sp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Theme.WebMotorHomeApp.inputs"
+                    android:id="@+id/nameUser"
+                    android:autofillHints="Joao da Silva"
+                    android:hint="Joao da Silva"
+                    android:inputType="text"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Theme.WebMotorHomeApp.inputs"
+                    android:id="@+id/lastname"
+                    android:autofillHints="Sobrenome"
+                    android:hint="Sobrenome"
+                    android:inputType="text"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Theme.WebMotorHomeApp.inputs"
+                    android:id="@+id/email"
+                    android:autofillHints="Email"
+                    android:hint="Email"
+                    android:inputType="text"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cpf"
+                    android:autofillHints="CPF"
+                    android:hint="CPF"
+                    style="@style/Theme.WebMotorHomeApp.inputs"
+                    android:inputType="textEmailAddress"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/password"
+                        android:autofillHints="Data de Nascimento"
+                        android:hint="Data de Nascimento"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        style="@style/Theme.WebMotorHomeApp.inputs"
+                        android:inputType="text"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/confirmPassword"
+                        android:autofillHints="Sexo"
+                        android:layout_weight="1"
+                        android:hint="Sexo"
+                        style="@style/Theme.WebMotorHomeApp.inputs"
+                        android:inputType=""/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/endereco"
+                    android:autofillHints="Endereco"
+                    android:hint="Endereco"
+                    style="@style/Theme.WebMotorHomeApp.inputs"
+                    android:inputType="text"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/numero"
+                        android:autofillHints="Numero"
+                        android:hint="Numero"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        style="@style/Theme.WebMotorHomeApp.inputs"
+                        android:inputType="text"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bairro"
+                        android:autofillHints="Bairro"
+                        android:layout_weight="1"
+                        android:hint="Bairro"
+                        style="@style/Theme.WebMotorHomeApp.inputs"
+                        android:inputType=""/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cidade"
+                        android:autofillHints="Cidade"
+                        android:hint="Cidade"
+                        android:layout_weight="2"
+                        android:layout_marginRight="10dp"
+                        style="@style/Theme.WebMotorHomeApp.inputs"
+                        android:inputType="text"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/uf"
+                        android:autofillHints="UF"
+                        android:layout_weight="1"
+                        android:hint="UF"
+                        style="@style/Theme.WebMotorHomeApp.inputs"
+                        android:inputType=""/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Criar conta"
+            android:id="@+id/buttonCriarConta"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/Theme.WebMotorHomeApp.buttons"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
