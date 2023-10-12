@@ -1,0 +1,17 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(user, "Usuario viajante", "Uma pessoa interessanda em viajar usando um motorhome.")
+System(wba, "Webmotorhome Application", "Permite a exposição de motorhomes à compra ou aluguel, facilitando negocios e viajens.")
+System_Ext(api, "Api de Pagamento", "Serviço disponibilizado por terceiro para autorização de pagamento através da plataforma")
+System_Ext(es, "E-mail system", "Serviço de e-mail externo")
+
+Rel(user, wba, "Uses")
+Rel(es, user, "Envia e-mail")
+Rel(wba, es, "Envia e-mail")
+Rel(wba, api, "Envia pagamentos para")
+Rel(api, user, "Envia liquidação de pagamento para")
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+Container(app, "[Client]Motorhome app", "Kotltin native", "Possibilita realizar anuncio de veiculos, assim como o gerenciamento destes. Permite a compra do veiculo.")
+Container(db, "Database", "SQLite Banco de dados relacional", "Armazena todos dados relativos à aplicação")
+
+Container_Boundary(web, "Web motorhome Server") {
+    Component(model, "Data model", "Cama de definição", "Declara as entidades/objetos necessários para funcionamento correto")
+    Component(router, "Router", "Camada de Interface", "Declara as rotas de entradas para dentro da aplicação")
+    Component(controller, "Controller", "Camada de controle", "Realiza validação dos parametros recebidos e reage de acordo.")
+    Component(security, "Compenente de Seguraça", "JWT and HASHING", "Arquivos de configuração do JWT. Hashsing e validação da senha.")
+    Component(dao, "Database Facade", "Ktor/exposed(lib)", "Definicação das chamadas e conexão com o banco")
+
+    Rel(router, controller, "envia para")
+    Rel(controller, security, "uses")
+    Rel(controller, dao, "uses")
+    Rel(dao, model, "implements")
+    Rel(dao, db, "lê & escreve em", "jdbc:sqlite")
+}
+
+Rel(app, router, "Uses", "JSON/HTTPS")
+
+@enduml

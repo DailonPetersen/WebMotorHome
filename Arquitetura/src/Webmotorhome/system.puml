@@ -1,0 +1,28 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(user, "Usuario viajante", "Uma pessoa interessanda em viajar usando um motorhome.")
+System_Ext(es, "E-mail", "Serviço de e-mail externo")
+System_Ext(api, "Api de Pagamento", "Serviço disponibilizado por terceiro para autorização de pagamento através da plataforma")
+
+System_Boundary(wba_container, "Webmotorhome Application") {
+    Container(wba, "[Server]Aplicação Motorhome", "Kotlin com Ktor", "Disponibiliza os dados para o client de forma integra através de arquitetura REST")
+    Container(app, "[Client]Motorhome app", "Kotltin native", "Possibilita realizar anuncio de veiculos, assim como o gerenciamento destes. Permite a compra do veiculo.")
+    Container(db, "Database", "SQLite Banco de dados relacional", "Armazena todos dados relativos à aplicação")
+    
+    Rel(app, wba, "solicita", "HTTPS")
+    Rel(wba, db, "lê & escreve em", "jdbc:sqlite")
+}
+
+Rel(wba, es, "envia e-mail")
+Rel(api, user, "envia liquidação de pagamento para")
+Rel(user, app, "uses", "HTTPS")
+
+
+Rel(wba, api, "envia pagamentos para")
+
+Rel(es, user, "envia e-mails")
+
+@enduml
