@@ -1,0 +1,27 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+System(wba, "Webmotorhome Application", "Permite a exposição de motorhomes à compra ou aluguel, facilitando negocios e viajens.")
+
+Container_Boundary(app, "Web motorhome app") {
+    Component(model, "Data model", "Cama de definição", "Declara as entidades/objetos necessários para funcionamento correto do app")
+    Component(dao, "Database", "Kotlin/room(lib)", "Criação do banco local e suas classes, definicação das chamadas e conexão.")
+    Component(newtork, "Compenente de Comunicação", "Retrofit2 + OkHttp3", "Componente responsável por criar a comunicação de forma segura. Agrupado de subpacotes com suas implementações para rotas")
+    Component(ui, "Pacote de Views", "Kotlin MVVM", "Agrupado de subpacotes divididos por funcionaldiade/tela. Com seus respectivos ViewModels")
+    Component(pay, "Modulo de Pagamento", "Cielo/Getnet/Stone - REST", "Camada para troca de informações com api de pagamento")
+
+    Rel(newtork, model, "utiliza para manipulação")
+    Rel(newtork, dao, "escreve")
+    Rel(dao, model, "implements")
+    Rel(newtork, ui, "entrega para")
+    Rel(ui, pay, "solicita para")
+    Rel(newtork, wba, "solicita", "HTTPS")
+}
+
+System_Ext(api, "Api de Pagamento", "Serviço disponibilizado por terceiro para autorização de pagamento através da plataforma")
+
+Rel(pay, api, "Uses", "JSON/HTTPS")
+
+@enduml
