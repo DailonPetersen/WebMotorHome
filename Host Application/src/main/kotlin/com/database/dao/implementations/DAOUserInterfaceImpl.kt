@@ -4,6 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt
 import com.data.Usuario
 import com.data.Usuarios
 import com.database.dao.facades.DAOUsuarioFacade
+import com.plugins.DatabaseUtil
 import com.plugins.Databases.dbQuery
 import mu.KotlinLogging
 import com.security.Encryptor.hashPassword
@@ -17,18 +18,18 @@ class DAOUserFacadeImpl: DAOUsuarioFacade {
     private val logger = KotlinLogging.logger("UserRepository")
 
     override suspend fun getAll(): List<Usuario> = dbQuery {
-        Usuarios.selectAll().map { resultRowToUser(it) }
+        Usuarios.selectAll().map { DatabaseUtil.resultRowToUser(it) }
     }
 
     override suspend fun get(id: Int): Usuario? = dbQuery {
         Usuarios.select { Usuarios.id eq id}
-            .map { resultRowToUser(it) }
+            .map { DatabaseUtil.resultRowToUser(it) }
             .singleOrNull()
     }
 
     override suspend fun getByEmail(email: String): Usuario? = dbQuery {
         Usuarios.select { Usuarios.email eq email }
-            .map { resultRowToUser(it) }
+            .map { DatabaseUtil.resultRowToUser(it) }
             .singleOrNull()
     }
 
@@ -40,7 +41,7 @@ class DAOUserFacadeImpl: DAOUsuarioFacade {
             it[password] = hashPassword(usuario.password)
             it[telefone] = usuario.telefone
         }
-        statementInsert.resultedValues?.singleOrNull()?.let(::resultRowToUser)
+        statementInsert.resultedValues?.singleOrNull()?.let{ DatabaseUtil.resultRowToUser(it) }
     }
 
     override suspend fun update(usuario: Usuario): Boolean = dbQuery {
@@ -56,15 +57,6 @@ class DAOUserFacadeImpl: DAOUsuarioFacade {
     override suspend fun delete(id: Int): Boolean = dbQuery {
         Usuarios.deleteWhere { Usuarios.id eq id } > 0
     }
-
-    private fun resultRowToUser(row: ResultRow) = Usuario(
-        id = row[Usuarios.id],
-        nome = row[Usuarios.nome],
-        sobrenome = row[Usuarios.sobrenome],
-        email = row[Usuarios.email],
-        password = row[Usuarios.password],
-        telefone = row[Usuarios.telefone]
-    )
 }
 
 class Cripty() {

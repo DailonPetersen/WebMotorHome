@@ -21,7 +21,7 @@ object Chats: Table("chats") {
     val idCliente = integer("id_cliente") references Usuarios.id
     val idAnuncio = integer("id_anuncio") references Anuncios.id
     val nomeAnuncio = varchar("nome_anuncio", 100)
-    val lastMessage = varchar("last_message", 255)
+    val lastMessage = varchar("last_message", 255).nullable()
 
     override val primaryKey = PrimaryKey(Chats.id)
 }

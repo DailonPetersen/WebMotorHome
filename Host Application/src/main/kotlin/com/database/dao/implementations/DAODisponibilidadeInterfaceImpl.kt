@@ -4,6 +4,7 @@ import com.data.Disponibilidade
 import com.data.Disponibilidades
 import com.data.Fabricas
 import com.database.dao.facades.DAODisponibilidadeInterface
+import com.plugins.DatabaseUtil
 import com.plugins.Databases.dbQuery
 import mu.KotlinLogging
 import org.jetbrains.exposed.sql.*
@@ -14,12 +15,12 @@ class DAODisponibilidadeInterfaceImpl : DAODisponibilidadeInterface {
     private val logger = KotlinLogging.logger("AvaibilityRepository")
 
     override suspend fun getAll(): List<Disponibilidade> = dbQuery {
-        Disponibilidades.selectAll().map(::resultRowToDisponibilidade)
+        Disponibilidades.selectAll().map{ DatabaseUtil.resultRowToDisponibilidade(it) }
     }
 
     override suspend fun get(id: Int): Disponibilidade? = dbQuery {
         Fabricas.select { Fabricas.id eq id }
-            .map {resultRowToDisponibilidade(it)}
+            .map { DatabaseUtil.resultRowToDisponibilidade(it) }
             .singleOrNull()
     }
 
@@ -28,7 +29,7 @@ class DAODisponibilidadeInterfaceImpl : DAODisponibilidadeInterface {
             it[dataInicio] = disponibilidade.dataInicio
             it[dataFim] = disponibilidade.dataFim
         }
-        statement.resultedValues?.singleOrNull()?.let(::resultRowToDisponibilidade)
+        statement.resultedValues?.singleOrNull()?.let{ DatabaseUtil.resultRowToDisponibilidade(it) }
     }
 
     override suspend fun update(disponibilidade: Disponibilidade): Boolean = dbQuery {
@@ -41,10 +42,4 @@ class DAODisponibilidadeInterfaceImpl : DAODisponibilidadeInterface {
     override suspend fun delete(id: Int): Boolean = dbQuery {
         Disponibilidades.deleteWhere { Disponibilidades.id eq id } > 0
     }
-
-    private fun resultRowToDisponibilidade(row: ResultRow) = Disponibilidade(
-        id = row[Disponibilidades.id],
-        dataInicio = row[Disponibilidades.dataInicio],
-        dataFim = row[Disponibilidades.dataFim]
-    )
 }

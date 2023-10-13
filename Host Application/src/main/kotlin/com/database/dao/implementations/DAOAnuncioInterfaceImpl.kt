@@ -3,6 +3,7 @@ package com.database.dao.implementations
 import com.data.Anuncio
 import com.data.Anuncios
 import com.database.dao.facades.DAOAnuncioInterface
+import com.plugins.DatabaseUtil
 import com.plugins.Databases
 import mu.KotlinLogging
 import org.jetbrains.exposed.sql.*
@@ -12,12 +13,12 @@ class DAOAnuncioInterfaceImpl : DAOAnuncioInterface {
     private val logger = KotlinLogging.logger("advertisementRepository")
 
     override suspend fun getAll(): List<Anuncio> = Databases.dbQuery {
-        Anuncios.selectAll().map(::resultRowToAnuncio)
+        Anuncios.selectAll().map{ DatabaseUtil.resultRowToAnuncio(it) }
     }
 
     override suspend fun get(id: Int): Anuncio? = Databases.dbQuery {
         Anuncios.select { Anuncios.id eq id }
-            .map(::resultRowToAnuncio)
+            .map{ DatabaseUtil.resultRowToAnuncio(it) }
             .singleOrNull()
     }
 
@@ -32,7 +33,7 @@ class DAOAnuncioInterfaceImpl : DAOAnuncioInterface {
             it[dataDeDisponibilidadeAluguel] = anuncio.dataDeDisponibilidadeAluguel?.run { this } ?: 0
             it[dataDeDisponibilidadeExposicao] = anuncio.dataDeDisponibilidadeExposicao?.run { this } ?: 0
         }
-        statement.resultedValues?.singleOrNull()?.let(::resultRowToAnuncio)
+        statement.resultedValues?.singleOrNull()?.let { DatabaseUtil.resultRowToAnuncio(it) }
     }
 
     override suspend fun update(anuncio: Anuncio): Boolean = Databases.dbQuery {
@@ -51,16 +52,4 @@ class DAOAnuncioInterfaceImpl : DAOAnuncioInterface {
     override suspend fun delete(id: Int): Boolean = Databases.dbQuery {
         Anuncios.deleteWhere { Anuncios.id eq id } > 0
     }
-
-    private fun resultRowToAnuncio(row: ResultRow) = Anuncio(
-        id = row[Anuncios.id],
-        idMotorhome = row[Anuncios.idMotorhome],
-        idCriador = row[Anuncios.idCriador],
-        precoAluguel = row[Anuncios.precoAluguel],
-        precoVenda = row[Anuncios.precoVenda],
-        disponivelParaAluguel = row[Anuncios.disponivelParaAluguel],
-        descricao = row[Anuncios.descricao],
-        dataDeDisponibilidadeAluguel = row[Anuncios.dataDeDisponibilidadeAluguel],
-        dataDeDisponibilidadeExposicao = row[Anuncios.dataDeDisponibilidadeExposicao]
-    )
 }

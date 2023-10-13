@@ -3,6 +3,7 @@ package com.database.dao.implementations
 import com.data.Message
 import com.data.Messages
 import com.database.dao.facades.DAOMessageInterface
+import com.plugins.DatabaseUtil
 import com.plugins.Databases
 import mu.KotlinLogging
 import org.jetbrains.exposed.sql.*
@@ -12,12 +13,12 @@ class DAOMessageInterfaceImpl : DAOMessageInterface {
     private val logger = KotlinLogging.logger("advertisementRepository")
 
     override suspend fun getAll(): List<Message> = Databases.dbQuery {
-        Messages.selectAll().map(::resultRowToMessage)
+        Messages.selectAll().map{ DatabaseUtil.resultRowToMessage(it) }
     }
 
     override suspend fun get(id: Int): Message? = Databases.dbQuery {
         Messages.select { Messages.id eq id }
-            .map(::resultRowToMessage)
+            .map{ DatabaseUtil.resultRowToMessage(it) }
             .singleOrNull()
     }
 
@@ -26,7 +27,7 @@ class DAOMessageInterfaceImpl : DAOMessageInterface {
             it[idAutor] = message.idAutor
             it[chatId] = message.chatId
         }
-        statement.resultedValues?.singleOrNull()?.let(::resultRowToMessage)
+        statement.resultedValues?.singleOrNull()?.let { DatabaseUtil.resultRowToMessage(it) }
     }
 
     override suspend fun update(message: Message): Boolean = Databases.dbQuery {
@@ -40,10 +41,4 @@ class DAOMessageInterfaceImpl : DAOMessageInterface {
     override suspend fun delete(id: Int): Boolean = Databases.dbQuery {
         Messages.deleteWhere { Messages.id eq id } > 0
     }
-
-    private fun resultRowToMessage(row: ResultRow) = Message(
-        idAutor = row[Messages.idAutor],
-        chatId = row[Messages.chatId],
-        msg = row[Messages.msg]
-    )
 }

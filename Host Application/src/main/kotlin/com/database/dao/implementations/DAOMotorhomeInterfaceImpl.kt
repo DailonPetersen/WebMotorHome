@@ -3,6 +3,7 @@ package com.database.dao.implementations
 import com.data.MotorHome
 import com.data.MotorHomes
 import com.database.dao.facades.DAOMotorHomeFacade
+import com.plugins.DatabaseUtil
 import com.plugins.Databases.dbQuery
 import mu.KotlinLogging
 import org.jetbrains.exposed.sql.*
@@ -11,24 +12,15 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 class DAOMotorhomeInterfaceImpl : DAOMotorHomeFacade {
     private val logger = KotlinLogging.logger("MotorhomeRepository")
 
-    private fun resultRowToMotorhome(row: ResultRow) = MotorHome(
-        id = row[MotorHomes.id],
-        modelo = row[MotorHomes.modelo],
-        descricao = row[MotorHomes.descricao],
-        ano = row[MotorHomes.ano],
-        exposicao = row[MotorHomes.exposicao],
-        avaliacao = row[MotorHomes.avaliacao]
-    )
-
     override suspend fun getAll(): List<MotorHome> = dbQuery {
-        MotorHomes.selectAll().map(::resultRowToMotorhome)
+        MotorHomes.selectAll().map{ DatabaseUtil.resultRowToMotorhome(it) }
     }
 
     override suspend fun get(id: Int): MotorHome? {
         try {
             val resultado = dbQuery {
                 MotorHomes.select { MotorHomes.id eq id }
-                    .map(::resultRowToMotorhome)
+                    .map{ DatabaseUtil.resultRowToMotorhome(it) }
                     .singleOrNull()
             }
             return resultado
@@ -47,7 +39,7 @@ class DAOMotorhomeInterfaceImpl : DAOMotorHomeFacade {
             it[exposicao] = motorHome.exposicao
             it[avaliacao] = motorHome.avaliacao
         }
-        insertStament.resultedValues?.singleOrNull()?.let(::resultRowToMotorhome)
+        insertStament.resultedValues?.singleOrNull()?.let{ DatabaseUtil.resultRowToMotorhome(it) }
     }
 
     override suspend fun update(motorHome: MotorHome): Boolean = dbQuery {

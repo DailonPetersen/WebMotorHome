@@ -4,6 +4,7 @@ import com.data.Fabrica
 import com.data.Fabricas
 import com.data.Usuarios
 import com.database.dao.facades.DAOFabricaInterface
+import com.plugins.DatabaseUtil
 import com.plugins.Databases.dbQuery
 import mu.KotlinLogging
 import org.jetbrains.exposed.sql.*
@@ -14,12 +15,12 @@ class DAOFabricaInterfaceImpl : DAOFabricaInterface {
     private val logger = KotlinLogging.logger("FactoryRepository")
 
     override suspend fun getAll(): List<Fabrica> = dbQuery {
-        Fabricas.selectAll().map(::resultRowToFabrica)
+        Fabricas.selectAll().map{ DatabaseUtil.resultRowToFabrica(it) }
     }
 
     override suspend fun get(id: Int): Fabrica? = dbQuery {
         Fabricas.select { Fabricas.id eq id }
-            .map (::resultRowToFabrica)
+            .map { DatabaseUtil.resultRowToFabrica(it) }
             .singleOrNull()
     }
 
@@ -29,9 +30,10 @@ class DAOFabricaInterfaceImpl : DAOFabricaInterface {
             it[nomeFantasia] = fabrica.nomeFantasia
             it[razaoSocial] = fabrica.razaoSocial
             it[email] = fabrica.email
+            it[telefone] = fabrica.telefone
             it[cnpj] = fabrica.cnpj
         }
-        statement.resultedValues?.singleOrNull()?.let(::resultRowToFabrica)
+        statement.resultedValues?.singleOrNull()?.let { DatabaseUtil.resultRowToFabrica(it) }
     }
 
     override suspend fun update(fabrica: Fabrica): Boolean = dbQuery {
@@ -40,6 +42,7 @@ class DAOFabricaInterfaceImpl : DAOFabricaInterface {
             it[nomeFantasia] = fabrica.nomeFantasia
             it[razaoSocial] = fabrica.razaoSocial
             it[email] = fabrica.email
+            it[telefone] = fabrica.telefone
             it[cnpj] = fabrica.cnpj
         } > 0
     }
@@ -47,13 +50,4 @@ class DAOFabricaInterfaceImpl : DAOFabricaInterface {
     override suspend fun delete(id: Int): Boolean = dbQuery {
         Fabricas.deleteWhere { Fabricas.id eq id } > 0
     }
-
-    private fun resultRowToFabrica(row: ResultRow) = Fabrica(
-        id = row[Fabricas.id],
-        idUser = row[Fabricas.idUser],
-        nomeFantasia = row[Fabricas.nomeFantasia],
-        razaoSocial = row[Fabricas.razaoSocial],
-        email = row[Fabricas.email],
-        cnpj = row[Fabricas.cnpj]
-    )
 }

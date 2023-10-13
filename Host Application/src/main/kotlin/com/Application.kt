@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
 fun Application.function() {
     Databases.init()
     ModulesKoinInjection.init()
-    configureSwagger()
+    //configureSwagger()
     configureMotorHomeRoutes()
     configureUserRoutes()
     configureAnuncioRoutes()

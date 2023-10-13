@@ -19,9 +19,9 @@ object Anuncios: Table("anuncios") {
     val id = integer("id").autoIncrement().uniqueIndex()
     val idMotorhome = integer("id_motorhome") references MotorHomes.id
     val idCriador = integer("id_criador") references Usuarios.id
-    val precoAluguel = double("preco_aluguel")
-    val precoVenda = double("preco_venda")
-    val disponivelParaAluguel = bool("disponivel_para_alugar")
+    val precoAluguel = double("preco_aluguel").nullable()
+    val precoVenda = double("preco_venda").nullable()
+    val disponivelParaAluguel = bool("disponivel_para_alugar").nullable()
     val descricao = varchar("descricao", 255)
     val dataDeDisponibilidadeAluguel = integer("data_disponibilidade_aluguel") references Disponibilidades.id
     val dataDeDisponibilidadeExposicao = integer("data_disponibilidade_exposicao") references Disponibilidades.id

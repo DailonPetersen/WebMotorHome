@@ -12,8 +12,8 @@ data class Pedido(
 
 object Pedidos: Table() {
     val id = integer("id").autoIncrement().uniqueIndex()
-    val idFabrica = integer("id_fabrica")
-    val idCliente = integer("id_cliente")
+    val idFabrica = integer("id_fabrica") references Fabricas.id
+    val idCliente = integer("id_cliente") references Usuarios.id
     val descricao = varchar("descricao", 100)
     val preco = double("preco")
 

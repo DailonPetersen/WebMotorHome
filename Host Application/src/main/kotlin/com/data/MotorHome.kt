@@ -8,7 +8,7 @@ data class MotorHome(
     val descricao: String,
     val ano: Int,
     val exposicao: Boolean,
-    val avaliacao: Int)
+    val avaliacao: Int? = null)
 
 object MotorHomes: Table("MotorHomes") {
     val id = integer("id").autoIncrement().uniqueIndex()
@@ -16,7 +16,7 @@ object MotorHomes: Table("MotorHomes") {
     val descricao = varchar("descricao", 1024)
     val ano = integer("ano")
     val exposicao = bool("exposicao")
-    val avaliacao = integer("avaliacao")
+    val avaliacao = integer("avaliacao").nullable()
 
     override val primaryKey = PrimaryKey(id)
 }
