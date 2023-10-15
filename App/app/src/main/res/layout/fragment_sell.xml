@@ -115,16 +115,15 @@
                 app:layout_constraintBottom_toTopOf="@id/carouselLayout"
                 app:layout_constraintTop_toBottomOf="@+id/scrollView">
 
-                <RadioButton
+                <TextView
                     android:id="@+id/radioButtonDisponibilidade"
                     android:layout_width="wrap_content"
                     android:layout_height="25sp"
-                    android:background="@drawable/rounded_yellow_rec"
-                    android:padding="2sp"
-                    android:pointerIcon="hand"
+                    style="@style/Theme.WebMotorHomeApp.options"
                     android:text="Disponivel para exposição"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:paddingHorizontal="5sp"
+                    app:drawableStartCompat="@drawable/calendar_today_24"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,6 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30sp"
                     android:layout_marginTop="5sp"
+                    android:id="@+id/addImagesButton"
                     android:background="@drawable/rounded_gray_rec"
                     android:gravity="center_horizontal|center_vertical"
                     android:paddingHorizontal="5sp"
@@ -213,7 +213,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="OK"
-        android:id="@+id/buttonCriarConta"
+        android:id="@+id/buttonCriarAnuncio"
         android:layout_gravity="bottom"
         android:layout_margin="15sp"
         style="@style/Theme.WebMotorHomeApp.buttons" />

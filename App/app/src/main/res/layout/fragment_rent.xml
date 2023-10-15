@@ -47,32 +47,12 @@
                     style="@style/Theme.WebMotorHomeApp.titles"
                     android:id="@+id/Inicio"/>
 
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/datePickerInicio"
-                    android:paddingHorizontal="5sp"
-                    android:layout_marginEnd="10sp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/rounded_yellow_rec">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:layout_gravity="center_horizontal|center_vertical"
-                        android:layout_marginEnd="5sp"
-                        android:background="@drawable/rounded_yellow_rec"
-                        android:src="@drawable/calendar_today_24"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:text="07/10/2023" />
-                </LinearLayout>
+                    android:text="07/10/2023"
+                    app:drawableStartCompat="@drawable/calendar_today_24"
+                    style="@style/Theme.WebMotorHomeApp.options" />
 
                 <TextView
                     android:id="@+id/textFim"
@@ -82,31 +62,13 @@
                     android:text="Fim: "
                     android:textSize="12sp" />
 
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/datePickerFim"
-                    android:paddingHorizontal="5sp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/rounded_yellow_rec">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:layout_marginEnd="5sp"
-                        android:layout_gravity="center_horizontal|center_vertical"
-                        android:background="@drawable/rounded_yellow_rec"
-                        android:src="@drawable/calendar_today_24"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:text="07/10/2023" />
-                </LinearLayout>
+                    android:text="07/10/2023"
+                    style="@style/Theme.WebMotorHomeApp.options"
+                    app:drawableStartCompat="@drawable/calendar_today_24"
+                    android:background="@drawable/rounded_yellow_rec" />
             </LinearLayout>
         </ScrollView>
 

@@ -70,6 +70,8 @@ private fun insertDefaults() {
                     statement[ano] = 1989
                     statement[exposicao] = false
                     statement[avaliacao] = null
+                    statement[montadora] = "Volkswagen"
+                    statement[placa] = "ICV2F95"
                 }
                 inserted.resultedValues?.let { result ->
                     result.singleOrNull()?.let {row ->
@@ -84,6 +86,25 @@ private fun insertDefaults() {
                     statement[ano] = 2009
                     statement[exposicao] = false
                     statement[avaliacao] = 5
+                    statement[montadora] = "Renault"
+                    statement[placa] = "OCI4L53"
+                }
+                inserted.resultedValues?.let { result ->
+                    result.singleOrNull()?.let {row ->
+                        motors.add(1, DatabaseUtil.resultRowToMotorhome(row) )
+                    }
+                }
+            }
+
+            transaction {
+                val inserted = MotorHomes.insert {statement ->
+                    statement[modelo] = "Sprinter"
+                    statement[descricao] = "Sprinter. Com banheiro interno, cozinha e fogão internos. Possui direção hidraulica, ar condicionado."
+                    statement[ano] = 2012
+                    statement[exposicao] = false
+                    statement[avaliacao] = 5
+                    statement[montadora] = "Renault"
+                    statement[placa] = "DFI4L43"
                 }
                 inserted.resultedValues?.let { result ->
                     result.singleOrNull()?.let {row ->
@@ -193,6 +214,16 @@ private fun insertDefaults() {
                     statement[dataDeDisponibilidadeAluguel] = dispos[0].id!!
                     statement[dataDeDisponibilidadeExposicao] = dispos[1].id!!
                 }
+                Anuncios.insert { statement ->
+                    statement[idMotorhome] = 2
+                    statement[idCriador] = 1
+                    statement[precoAluguel] = 0.00
+                    statement[precoVenda] =  0.00
+                    statement[descricao] = motors[2].descricao
+                    statement[disponivelParaAluguel] = false
+                    statement[dataDeDisponibilidadeAluguel] = dispos[0].id!!
+                    statement[dataDeDisponibilidadeExposicao] = dispos[1].id!!
+                }
             }
         }
     }
@@ -209,6 +240,16 @@ object DatabaseUtil {
         }
         return null
     }
+
+    fun resultRowToEnderedo(row: ResultRow) = Endereco(
+        id = row[Enderecos.id],
+        idUser = row[Enderecos.idUser],
+        logradouro = row[Enderecos.logradouro],
+        bairro = row[Enderecos.bairro],
+        numero = row[Enderecos.numero],
+        cidade = row[Enderecos.cidade],
+        cep = row[Enderecos.cep],
+    )
 
     fun resultRowToImage(row: ResultRow) = Image(
         id = row[Images.id],
@@ -268,6 +309,8 @@ object DatabaseUtil {
         descricao = row[MotorHomes.descricao],
         ano = row[MotorHomes.ano],
         exposicao = row[MotorHomes.exposicao],
+        montadora = row[MotorHomes.montadora],
+        placa = row[MotorHomes.placa],
         avaliacao = row[MotorHomes.avaliacao]
     )
 

@@ -1,22 +1,25 @@
 package com.routes.controllers
 
 import com.data.Usuario
+import com.database.dao.facades.DAOUsuarioFacade
 import com.database.dao.implementations.DAOUserFacadeImpl
+import com.routes.facades.UserControllerFacade
 import io.ktor.http.*
 import io.ktor.server.util.*
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class UserController: KoinComponent {
+class UserController: UserControllerFacade, KoinComponent {
 
-    private val dbUser = DAOUserFacadeImpl()
+    private val dbUser by inject<DAOUsuarioFacade>()
 
-    suspend fun getAll(): List<Usuario> = dbUser.getAll()
+    override suspend fun getAll(): List<Usuario> = dbUser.getAll()
 
-    suspend fun getByEmail(email: String): Usuario? = dbUser.getByEmail(email)
+    override suspend fun getByEmail(email: String): Usuario? = dbUser.getByEmail(email)
 
-    suspend fun user(id: Int): Usuario = dbUser.get(id) ?: throw NoSuchElementException()
+    override suspend fun user(id: Int): Usuario = dbUser.get(id) ?: throw NoSuchElementException()
 
-    suspend fun editUser(item: Parameters, id: Int): Boolean {
+    override suspend fun editUser(item: Parameters, id: Int): Boolean {
         val userToEdit = Usuario(
             nome = item.getOrFail("nome"),
             sobrenome = item.getOrFail("sobrenome"),
@@ -33,7 +36,7 @@ class UserController: KoinComponent {
         return dbUser.update(userToEdit)
     }
 
-    suspend fun addNewUser(item: Parameters): Usuario? {
+    override suspend fun addNewUser(item: Parameters): Usuario? {
         val userToAdd = Usuario(
             nome = item.getOrFail("nome"),
             sobrenome = item.getOrFail("sobrenome"),
@@ -49,5 +52,5 @@ class UserController: KoinComponent {
         return dbUser.insert(userToAdd)
     }
 
-    suspend fun remove(id: Int): Boolean = dbUser.delete(id)
+    override suspend fun remove(id: Int): Boolean = dbUser.delete(id)
 }

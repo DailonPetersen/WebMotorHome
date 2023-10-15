@@ -1,9 +1,11 @@
+import javafx.application.Application
 
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val exposedVersion = "0.41.1"
 val koinVersion = "3.3.1"
+val mainClass = "Application.kt"
 
 plugins {
     kotlin("jvm") version "1.9.0"
@@ -61,7 +63,18 @@ dependencies {
 
     //DI
     implementation ("io.insert-koin:koin-ktor:$koinVersion")
+    implementation ("io.insert-koin:koin-logger-slf4j:$koinVersion")
+
+
+
 
     //Cripty
     implementation("at.favre.lib:bcrypt:0.9.0")
+}
+
+tasks.register<Jar>("fatJar") {
+    manifest {
+        attributes["Main-Class"] = mainClass
+    }
+    from(configurations.runtimeClasspath.get().filter { it.isDirectory() }.map { it.toPath() })
 }

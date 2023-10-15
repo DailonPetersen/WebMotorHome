@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="1sp"
+        android:layout_marginHorizontal="15sp"
         android:layout_marginTop="100sp">
 
         <RelativeLayout
@@ -20,15 +21,15 @@
 
             <ImageView
                 android:id="@+id/circular_background"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/circle" />
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/profilePic"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_centerInParent="true"
                 android:scaleType="centerCrop"
                 app:riv_border_color="#333333"
@@ -43,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="João da Silva"
-            android:padding="15dp"
+            android:padding="20dp"
             android:textAlignment="textEnd"
             android:textAppearance="@style/Theme.WebMotorHomeApp.titles.white"/>
 
@@ -91,6 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@id/scrollViewDados"
+            android:layout_marginTop="10sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tornarseFabricaButton"
@@ -100,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Theme.WebMotorHomeApp.inputs"
@@ -109,7 +111,7 @@
                     android:hint="Joao da Silva"
                     android:inputType="text"/>
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Theme.WebMotorHomeApp.inputs"
@@ -118,7 +120,7 @@
                     android:hint="Sobrenome"
                     android:inputType="text"/>
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Theme.WebMotorHomeApp.inputs"
@@ -127,12 +129,12 @@
                     android:hint="Email"
                     android:inputType="text"/>
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cpf"
-                    android:autofillHints="CPF"
-                    android:hint="CPF"
+                    android:id="@+id/telefone"
+                    android:autofillHints="telefone"
+                    android:hint="Telefone"
                     style="@style/Theme.WebMotorHomeApp.inputs"
                     android:inputType="textEmailAddress"/>
 
@@ -141,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/password"
@@ -152,7 +154,7 @@
                         style="@style/Theme.WebMotorHomeApp.inputs"
                         android:inputType="text"/>
 
-                    <EditText
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/confirmPassword"

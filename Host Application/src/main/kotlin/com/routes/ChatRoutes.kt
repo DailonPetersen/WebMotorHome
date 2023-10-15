@@ -1,7 +1,7 @@
 package com.routes
 
 import com.data.Chat
-import com.routes.controllers.ChatController
+import com.routes.facades.ChatControllerFacade
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -9,13 +9,14 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import mu.KotlinLogging
-import org.koin.java.KoinJavaComponent
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-object ChatRoutes {
+object ChatRoutes: KoinComponent{
 
     private val logger = KotlinLogging.logger("ChatsRoutes")
 
-    private val controller by KoinJavaComponent.inject<ChatController>(ChatController::class.java)
+    private val controller by inject<ChatControllerFacade>()
 
     fun Application.configureChatRoutes()  {
 

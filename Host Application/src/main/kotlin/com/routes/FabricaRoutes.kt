@@ -1,7 +1,7 @@
 package com.routes
 
 import com.data.Fabrica
-import com.routes.controllers.FabricaController
+import com.routes.facades.FabricaControllerFacade
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -9,13 +9,14 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import mu.KotlinLogging
-import org.koin.java.KoinJavaComponent
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-object FabricaRoutes {
+object FabricaRoutes: KoinComponent {
 
     private val logger = KotlinLogging.logger("FabricaRoutes")
 
-    private val controller by KoinJavaComponent.inject<FabricaController>(FabricaController::class.java)
+    private val controller by inject<FabricaControllerFacade>()
 
     fun Application.configureFabricaRoutes()  {
 

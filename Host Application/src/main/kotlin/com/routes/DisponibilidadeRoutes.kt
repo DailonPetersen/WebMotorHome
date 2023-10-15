@@ -2,6 +2,7 @@ package com.routes
 
 import com.data.Disponibilidade
 import com.routes.controllers.DisponibilidadeController
+import com.routes.facades.DisponibilidadeControllerFacade
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -9,13 +10,14 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import mu.KotlinLogging
-import org.koin.java.KoinJavaComponent
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class DisponibilidadeRoutes {
+object DisponibilidadeRoutes: KoinComponent {
 
     private val logger = KotlinLogging.logger("DisponibilidadesRoutes")
 
-    private val controller by KoinJavaComponent.inject<DisponibilidadeController>(DisponibilidadeController::class.java)
+    private val controller by inject<DisponibilidadeControllerFacade>()
 
     fun Application.configureDisponibilidadeRoutes()  {
 

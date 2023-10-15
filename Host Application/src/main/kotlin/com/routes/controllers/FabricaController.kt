@@ -1,25 +1,30 @@
 package com.routes.controllers
 
 import com.data.Fabrica
+import com.database.dao.facades.DAOFabricaInterface
 import com.database.dao.implementations.DAOFabricaInterfaceImpl
+import com.database.dao.implementations.DAOUserFacadeImpl
+import com.routes.facades.FabricaControllerFacade
 import io.ktor.http.*
 import io.ktor.server.util.*
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class FabricaController: KoinComponent {
+class FabricaController: FabricaControllerFacade, KoinComponent {
     
-    private val dbFabrica = DAOFabricaInterfaceImpl()
+    private val dbFabrica by inject<DAOFabricaInterface>()
 
-    suspend fun getAll(): List<Fabrica> = dbFabrica.getAll()
+    override suspend fun getAll(): List<Fabrica> = dbFabrica.getAll()
 
-    suspend fun fabrica(id: Int): Fabrica = dbFabrica.get(id) ?: throw NoSuchElementException()
+    override suspend fun fabrica(id: Int): Fabrica = dbFabrica.get(id) ?: throw NoSuchElementException()
 
-    suspend fun editFabrica(item: Parameters, id: Int): Boolean {
+    override suspend fun editFabrica(item: Parameters, id: Int): Boolean {
         val fabricaToEdit = Fabrica(
             idUser = item.getOrFail("idUser").toInt(),
             nomeFantasia = item.getOrFail("nomeFantasia"),
             razaoSocial = item.getOrFail("razaoSocial"),
             email = item.getOrFail("email"),
+            telefone = item.getOrFail("telefone"),
             cnpj = item.getOrFail("cnpj")
         )
 
@@ -29,7 +34,7 @@ class FabricaController: KoinComponent {
         return dbFabrica.update(fabricaToEdit)
     }
 
-    suspend fun addNewFabrica(item: Fabrica): Fabrica? {
+    override suspend fun addNewFabrica(item: Fabrica): Fabrica? {
 
         if (item.idUser == 0) return null
         if (item.cnpj.isEmpty() || item.cnpj.isBlank()) return null
@@ -37,5 +42,5 @@ class FabricaController: KoinComponent {
         return dbFabrica.insert(item)
     }
 
-    suspend fun remove(id: Int): Boolean = dbFabrica.delete(id)
+    override suspend fun remove(id: Int): Boolean = dbFabrica.delete(id)
 }

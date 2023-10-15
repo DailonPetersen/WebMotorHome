@@ -1,21 +1,23 @@
 package com.routes.controllers
 
 import com.data.Message
+import com.database.dao.facades.DAOMessageInterface
 import com.database.dao.implementations.DAOMessageInterfaceImpl
+import com.routes.facades.MessageControllerFacade
 import io.ktor.http.*
 import io.ktor.server.util.*
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
+class MessageController: MessageControllerFacade, KoinComponent {
 
-class MessageController: KoinComponent {
+    private val dbMessage by inject<DAOMessageInterface>()
 
-    private val dbMessage = DAOMessageInterfaceImpl()
+    override suspend fun getAll(): List<Message> = dbMessage.getAll()
 
-    suspend fun getAll(): List<Message> = dbMessage.getAll()
+    override suspend fun message(id: Int): Message = dbMessage.get(id) ?: throw NoSuchElementException()
 
-    suspend fun message(id: Int): Message = dbMessage.get(id) ?: throw NoSuchElementException()
-
-    suspend fun editMessage(item: Parameters, id: Int): Boolean {
+    override suspend fun editMessage(item: Parameters, id: Int): Boolean {
         val messageToEdit = Message(
             idAutor = item.getOrFail("idAutor").toInt(),
             chatId = item.getOrFail("chatId").toInt(),
@@ -30,7 +32,7 @@ class MessageController: KoinComponent {
         return dbMessage.update(messageToEdit)
     }
 
-    suspend fun addNewMessage(item: Message): Message? {
+    override suspend fun addNewMessage(item: Message): Message? {
         if (item.msg.isEmpty() || item.msg.isBlank()) return null
         if (item.chatId == 0) return null
         if (item.idAutor == 0) return null
@@ -39,5 +41,5 @@ class MessageController: KoinComponent {
         return dbMessage.insert(item)
     }
 
-    suspend fun remove(id: Int): Boolean = dbMessage.delete(id)
+    override suspend fun remove(id: Int): Boolean = dbMessage.delete(id)
 }

@@ -1,25 +1,22 @@
 package com.routes
 
 import com.data.Anuncio
-import com.routes.controllers.AnuncioController
+import com.routes.facades.AnuncioFacades
 import io.ktor.http.*
-import io.ktor.serialization.gson.*
 import io.ktor.server.application.*
-import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import mu.KotlinLogging
-import org.koin.java.KoinJavaComponent
-import java.text.DateFormat
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-object AnuncioRoutes {
+object AnuncioRoutes: KoinComponent {
 
     private val logger = KotlinLogging.logger("AnunciosRoutes")
 
-    private val controller by KoinJavaComponent.inject<AnuncioController>(AnuncioController::class.java)
+    val controller by inject<AnuncioFacades>()
 
     fun Application.configureAnuncioRoutes()  {
 
@@ -41,7 +38,7 @@ object AnuncioRoutes {
 
                 val anuncioInserted = controller.addNewAnuncio(anuncioInsert)
                 anuncioInserted?.let {
-                    call.respondRedirect("anuncios/${it.id}")
+                        call.respondRedirect("anuncios/${anuncioInsert.id}")
                 } ?: call.respond(HttpStatusCode.BadGateway)
             }
 

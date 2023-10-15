@@ -1,21 +1,18 @@
 package com.routes.controllers
 
 import com.data.MotorHome
+import com.database.dao.facades.DAOMotorHomeFacade
 import com.database.dao.implementations.DAOMotorhomeInterfaceImpl
+import com.routes.facades.MotorhomeControllerFacade
 import io.ktor.http.*
 import io.ktor.server.util.*
 import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class MotorhomeController: MotohomeControllerInterface, KoinComponent {
+class MotorhomeController: MotorhomeControllerFacade, KoinComponent {
 
-    private val dbMotorHome = DAOMotorhomeInterfaceImpl().apply {
-        runBlocking {
-            if (this@apply.getAll().isEmpty()) {
-                insert(MotorHome(null, "kombi", "descricao", 1998, false, 4))
-            }
-        }
-    }
+    private val dbMotorHome by inject<DAOMotorHomeFacade>()
 
     override suspend fun getAll(): List<MotorHome> = dbMotorHome.getAll()
 
@@ -27,7 +24,9 @@ class MotorhomeController: MotohomeControllerInterface, KoinComponent {
             ano = item.getOrFail("ano").toInt(),
             descricao = item.getOrFail("descricao"),
             avaliacao = item.getOrFail("avaliacao").toInt(),
-            exposicao = item.getOrFail("exposicao").toBoolean()
+            exposicao = item.getOrFail("exposicao").toBoolean(),
+            montadora = item.getOrFail("montadora"),
+            placa = item.getOrFail("placa")
         )
 
         if (motorHomeToEdit.id != id) return false
@@ -43,7 +42,9 @@ class MotorhomeController: MotohomeControllerInterface, KoinComponent {
             ano = item.getOrFail("ano").toInt(),
             descricao = item.getOrFail("descricao"),
             avaliacao = item.getOrFail("avaliacao").toInt(),
-            exposicao = item.getOrFail("exposicao").toBoolean()
+            exposicao = item.getOrFail("exposicao").toBoolean(),
+            montadora = item.getOrFail("montadora"),
+            placa = item.getOrFail("placa")
         )
 
         if (motorHomeToAdd.descricao.length > 250) return null
@@ -54,12 +55,4 @@ class MotorhomeController: MotohomeControllerInterface, KoinComponent {
 
     override suspend fun remove(id: Int): Boolean = dbMotorHome.delete(id)
 
-}
-
-interface MotohomeControllerInterface {
-    suspend fun getAll(): List<MotorHome>
-    suspend fun motorhome(id: Int): MotorHome
-    suspend fun editMotorhome(item: Parameters, id: Int): Boolean
-    suspend fun addNewMotorHome(item: Parameters): MotorHome?
-    suspend fun remove(id: Int): Boolean
 }

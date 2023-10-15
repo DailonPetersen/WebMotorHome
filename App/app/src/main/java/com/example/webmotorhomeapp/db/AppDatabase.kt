@@ -35,7 +35,7 @@ import com.example.webmotorhomeapp.db.dao.UserDAO
     Pedido::class,
     Chat::class,
     Message::class,
-    AuthToken::class], version = 1)
+    AuthToken::class], version = 3)
 abstract class AppDatabase: RoomDatabase() {
 
     companion object {
@@ -67,26 +67,3 @@ abstract class AppDatabase: RoomDatabase() {
 
 
 }
-
-//class Database(context: Application): AppDatabase() {
-//
-//    val dbInstance: AppDatabase
-//
-//    init {
-//        dbInstance = getInstanceDatabase(context)
-//    }
-//
-//    override fun userDAO(): UserDAO = dbInstance.userDAO()
-//    override fun motorhomeDAO(): MotorhomeDAO = dbInstance.motorhomeDAO()
-//    override fun fabricaDAO(): FabricaDAO = dbInstance.fabricaDAO()
-//    override fun disponibilidadeDAO(): DisponibilidadeDAO = dbInstance.disponibilidadeDAO()
-//    override fun anuncioDAO(): AnuncioDAO = dbInstance.anuncioDAO()
-//    override fun pedidoDAO(): PedidoDAO = dbInstance.pedidoDAO()
-//
-//    override fun createOpenHelper(config: DatabaseConfiguration?): SupportSQLiteOpenHelper = dbInstance.openHelper
-//    override fun createInvalidationTracker(): InvalidationTracker = dbInstance.invalidationTracker
-//
-//    override fun clearAllTables() = dbInstance.clearAllTables()
-//
-//
-//}

@@ -8,6 +8,7 @@ import com.plugins.Databases.dbQuery
 import mu.KotlinLogging
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import kotlin.math.log
 
 class DAOMotorhomeInterfaceImpl : DAOMotorHomeFacade {
     private val logger = KotlinLogging.logger("MotorhomeRepository")

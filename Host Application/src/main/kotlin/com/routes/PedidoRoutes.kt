@@ -2,6 +2,7 @@ package com.routes
 
 import com.data.Pedido
 import com.routes.controllers.PedidoController
+import com.routes.facades.PedidoControllerFacade
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -9,14 +10,15 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import mu.KotlinLogging
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent
 
-class PedidoRoutes {
+object PedidoRoutes: KoinComponent {
 
     private val logger = KotlinLogging.logger("PedidosRoutes")
 
-    private val controller by KoinJavaComponent.inject<PedidoController>(PedidoController::class.java)
-
+    private val controller by inject<PedidoControllerFacade>()
     fun Application.configurePedidoRoutes()  {
 
         routing {

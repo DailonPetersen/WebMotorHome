@@ -1,20 +1,23 @@
 package com.routes.controllers
 
 import com.data.Chat
+import com.database.dao.facades.DAOChatInterface
 import com.database.dao.implementations.DAOChatInterfaceImpl
+import com.routes.facades.ChatControllerFacade
 import io.ktor.http.*
 import io.ktor.server.util.*
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class ChatController: KoinComponent {
+class ChatController: ChatControllerFacade, KoinComponent {
 
-    private val dbChat = DAOChatInterfaceImpl()
+    private val dbChat by inject<DAOChatInterface>()
 
-    suspend fun getAll(): List<Chat> = dbChat.getAll()
+    override suspend fun getAll(): List<Chat> = dbChat.getAll()
 
-    suspend fun chat(id: Int): Chat = dbChat.get(id) ?: throw NoSuchElementException()
+    override suspend fun chat(id: Int): Chat = dbChat.get(id) ?: throw NoSuchElementException()
 
-    suspend fun editChat(item: Parameters, id: Int): Boolean {
+    override suspend fun editChat(item: Parameters, id: Int): Boolean {
         val chatToEdit = Chat(
             idAnunciante = item.getOrFail("idAnunciante").toInt(),
             idCliente = item.getOrFail("idCliente").toInt(),
@@ -31,7 +34,7 @@ class ChatController: KoinComponent {
         return dbChat.update(chatToEdit)
     }
 
-    suspend fun addNewChat(item: Chat): Chat? {
+    override suspend fun addNewChat(item: Chat): Chat? {
         if (item.idAnunciante == 0) return null
         if (item.idCliente == 0) return null
         if (item.idAnuncio == 0) return null
@@ -40,5 +43,5 @@ class ChatController: KoinComponent {
         return dbChat.insert(item)
     }
 
-    suspend fun remove(id: Int): Boolean = dbChat.delete(id)
+    override suspend fun remove(id: Int): Boolean = dbChat.delete(id)
 }

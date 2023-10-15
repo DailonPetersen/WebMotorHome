@@ -2,6 +2,7 @@ package com.routes
 
 import com.data.Message
 import com.routes.controllers.MessageController
+import com.routes.facades.MessageControllerFacade
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -9,14 +10,16 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import mu.KotlinLogging
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent
 
 
-object MessageRoutes {
+object MessageRoutes: KoinComponent{
 
     private val logger = KotlinLogging.logger("MessageRoutes")
 
-    private val controller by KoinJavaComponent.inject<MessageController>(MessageController::class.java)
+    private val controller by inject<MessageControllerFacade>()
 
     fun Application.configureMessageRoutes()  {
 

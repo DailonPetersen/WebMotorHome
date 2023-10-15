@@ -1,39 +1,41 @@
 package com.di
 
+import com.database.dao.facades.*
 import com.database.dao.implementations.*
 import com.routes.controllers.*
+import com.routes.facades.*
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 object ModulesKoinInjection {
 
-    private val koinModulesController = module {
-        single<MotorhomeController> { MotorhomeController() }
-        single<UserController> { UserController() }
-        single<PedidoController> { PedidoController() }
-        single<FabricaController> { FabricaController() }
-        single<DisponibilidadeController> { DisponibilidadeController() }
-        single<AnuncioController> { AnuncioController() }
-        single<ChatController> { ChatController() }
-        single<MessageController> { MessageController() }
-        single<LoginController> { LoginController() }
+    val koinModulesController = module(createdAtStart = true) {
+        single<AnuncioFacades> { AnuncioController() }
+        single<MotorhomeControllerFacade> { MotorhomeController() }
+        single<UserControllerFacade> { UserController() }
+        single<PedidoControllerFacade> { PedidoController() }
+        single<FabricaControllerFacade> { FabricaController() }
+        single<DisponibilidadeControllerFacade> { DisponibilidadeController() }
+        single<ChatControllerFacade> { ChatController() }
+        single<MessageControllerFacade> { MessageController() }
+        single<LoginControllerFacade> { LoginController() }
     }
 
-    private val koinModulesFacadesImpl = module {
-        single<DAOMotorhomeInterfaceImpl> { DAOMotorhomeInterfaceImpl() }
-        single<DAOUserFacadeImpl> { DAOUserFacadeImpl() }
-        single<DAOAnuncioInterfaceImpl> { DAOAnuncioInterfaceImpl() }
-        single<DAODisponibilidadeInterfaceImpl> { DAODisponibilidadeInterfaceImpl() }
-        single<DAOFabricaInterfaceImpl> { DAOFabricaInterfaceImpl() }
-        single<DAOPedidosInterfaceImpl> { DAOPedidosInterfaceImpl() }
-        single<DAOChatInterfaceImpl> { DAOChatInterfaceImpl() }
-        single<DAOMessageInterfaceImpl> { DAOMessageInterfaceImpl() }
+    val koinModulesFacadesImpl = module(createdAtStart = true)  {
+        single<DAOMotorHomeFacade> { DAOMotorhomeInterfaceImpl() }
+        single<DAOUsuarioFacade> { DAOUserFacadeImpl() }
+        single<DAOAnuncioInterface> { DAOAnuncioInterfaceImpl() }
+        single<DAODisponibilidadeInterface> { DAODisponibilidadeInterfaceImpl() }
+        single<DAOFabricaInterface> { DAOFabricaInterfaceImpl() }
+        single<DAOPedidosInterface> { DAOPedidosInterfaceImpl() }
+        single<DAOChatInterface> { DAOChatInterfaceImpl() }
+        single<DAOMessageInterface> { DAOMessageInterfaceImpl() }
     }
 
-    fun init() {
-        startKoin {
-            koinModulesController
-            koinModulesFacadesImpl
-        }
-    }
+//    fun init() {
+//        startKoin {
+//            koinModulesController
+//            koinModulesFacadesImpl
+//        }
+//    }
 }

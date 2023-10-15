@@ -23,8 +23,6 @@ class WebMotorhomeApplication: Application() {
         fun getToken(token: String) {
             preferences.getString(KEY_APP_TOKEN, null)
         }
-
-
     }
 
     val dbInstance: AppDatabase by lazy { AppDatabase.getInstanceDatabase(this) }

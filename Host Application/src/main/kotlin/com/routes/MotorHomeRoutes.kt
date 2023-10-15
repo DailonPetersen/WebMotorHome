@@ -1,6 +1,7 @@
 package com.routes
 
 import com.routes.controllers.MotorhomeController
+import com.routes.facades.MotorhomeControllerFacade
 import io.ktor.http.*
 import io.ktor.serialization.gson.*
 import io.ktor.server.application.*
@@ -11,13 +12,15 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import mu.KotlinLogging
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent.inject
 import java.text.DateFormat
 
-object MotorHomeRoutes {
+object MotorHomeRoutes: KoinComponent {
     private val logger = KotlinLogging.logger("MotorhomeRoutes")
 
-    private val controller by inject<MotorhomeController>(MotorhomeController::class.java)
+    private val controller by inject<MotorhomeControllerFacade>()
 
     fun Application.configureMotorHomeRoutes()  {
         install(ContentNegotiation) {

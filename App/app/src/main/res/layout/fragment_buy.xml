@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ScrollView
+        <HorizontalScrollView
             android:id="@+id/seachScroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,38 +35,98 @@
             <LinearLayout
                 android:id="@+id/optionsLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <RadioButton
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5sp"
                     android:id="@+id/precoButton"
-                    style="@style/Theme.WebMotorHomeApp.options"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30sp"
-                    android:text="Preço" />
+                    style="@style/Theme.WebMotorHomeApp.options">
 
-                <RadioButton
+                    <ImageView
+                        android:layout_width="20sp"
+                        android:layout_height="20sp"
+                        android:src="@drawable/monetization_on_24"/>
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Preço" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5sp"
                     android:id="@+id/localizacaoButton"
-                    style="@style/Theme.WebMotorHomeApp.options"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30sp"
-                    android:text="Localização" />
+                    style="@style/Theme.WebMotorHomeApp.options">
 
-                <RadioButton
-                    android:id="@+id/montadorasButton"
-                    style="@style/Theme.WebMotorHomeApp.options"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30sp"
-                    android:text="Fabricante" />
+                    <ImageView
+                        android:layout_width="20sp"
+                        android:layout_height="20sp"
+                        android:src="@drawable/localizacao_24"/>
 
-                <RadioButton
+                    <TextView
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Localização" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5sp"
                     android:id="@+id/lojasFabricasButton"
-                    style="@style/Theme.WebMotorHomeApp.options"
+                    style="@style/Theme.WebMotorHomeApp.options">
+
+                    <ImageView
+                        android:layout_width="20sp"
+                        android:layout_height="20sp"
+                        android:src="@drawable/store_24"/>
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lojas/Fábricas" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="30sp"
-                    android:text="Lojas/Fábricas" />
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5sp"
+                    android:id="@+id/montadorasButton"
+                    style="@style/Theme.WebMotorHomeApp.options">
+
+                    <ImageView
+                        android:layout_width="20sp"
+                        android:layout_height="20sp"
+                        android:src="@drawable/car_24"/>
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fabricante" />
+                </LinearLayout>
             </LinearLayout>
-        </ScrollView>
+        </HorizontalScrollView>
 
         <LinearLayout
             android:id="@+id/anunciosResultadosLayout"

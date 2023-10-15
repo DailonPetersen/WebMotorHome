@@ -2,55 +2,34 @@ package com.example.webmotorhomeapp.ui.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.webmotorhomeapp.network.ApiService
+import com.example.webmotorhomeapp.data.anuncio.Anuncio
+import com.example.webmotorhomeapp.data.motorhome.Motorhome
+import com.example.webmotorhomeapp.repository.anuncios.AnunciosRepo
+import com.example.webmotorhomeapp.repository.motorhome.MotorhomeRepo
+import kotlinx.coroutines.flow.StateFlow
 
 
-class HomeViewModel(private val api: ApiService) : ViewModel() {
+class HomeViewModel() : ViewModel() {
 
-//    val repo = RepositoryUser(api)
-//
-//    private val _users = MutableLiveData<List<User>>()
-//
-//    fun getUsers(): LiveData<Result<List<User>?>> {
-//        Log.e("DAILON", "repo $repo")
-//        repo.buscaUsers(defaultCallback())
-//    }
+    private val anunciosRepo = AnunciosRepo()
+    private val motorhomeRepo = MotorhomeRepo()
+    var anuncios: StateFlow<List<Anuncio>?> = anunciosRepo.anuncios
+    var motorhomes: StateFlow<List<Motorhome>?> = motorhomeRepo.motorhomes
 
-
-    private fun defaultCallback(result: Boolean, message: String?, except: Throwable?): Unit {
-        when(result) {
-            true -> Log.e("DAILON", "user $message")
-            false -> Log.e("DAILON", "user $message")
-            else -> {}
+    fun fetchItems() {
+        anunciosRepo.getAllItems { _list, error ->
+            if (_list != null) {
+                Log.e("DAILON", "lista $_list")
+            } else {
+                Log.e("DAILON", "error $error")
+            }
+        }
+        motorhomeRepo.getAllItems { _list, error ->
+            if (_list != null) {
+                Log.e("DAILON", "lista $_list")
+            } else {
+                Log.e("DAILON", "error $error")
+            }
         }
     }
 }
-
-//class RepositoryUser (private val service: WebmotohomeApiService){
-//    fun buscaUsers(callback: (result: Boolean, message: List<User>?, except: Throwable?) -> Unit) {
-//        CoroutineScope(Dispatchers.IO).launch{
-//            service.getAllUsers().enqueue(object : Callback<ResponseBody> {
-//                override fun onResponse(
-//                    call: Call<ResponseBody>,
-//                    response: Response<ResponseBody>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        val body = response.body()?.string()!!
-//                        val type = object : TypeToken<List<User>>() {}.type
-//                        val users: List<User> = Gson().fromJson(body, type)
-//                        callback(true, users, null)
-//                    } else {
-//                        val body = response.errorBody()?.string()
-//                        callback(false, null, null )
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-//                    callback(false, null , t)
-//                }
-//
-//            })
-//        }
-//
-//    }
-//}

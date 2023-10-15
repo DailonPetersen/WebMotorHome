@@ -1,20 +1,23 @@
 package com.routes.controllers
 
 import com.data.Anuncio
+import com.database.dao.facades.DAOAnuncioInterface
+import com.database.dao.facades.DAOPedidosInterface
 import com.database.dao.implementations.DAOAnuncioInterfaceImpl
+import com.routes.facades.AnuncioFacades
 import io.ktor.http.*
 import io.ktor.server.util.*
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class AnuncioController: KoinComponent {
+class AnuncioController: AnuncioFacades, KoinComponent {
 
-    private val dbAnuncio = DAOAnuncioInterfaceImpl()
+    private val dbAnuncio  by inject<DAOAnuncioInterface>()
+    override suspend fun getAll(): List<Anuncio> = dbAnuncio.getAll()
 
-    suspend fun getAll(): List<Anuncio> = dbAnuncio.getAll()
+    override suspend fun anuncio(id: Int): Anuncio = dbAnuncio.get(id) ?: throw NoSuchElementException()
 
-    suspend fun anuncio(id: Int): Anuncio = dbAnuncio.get(id) ?: throw NoSuchElementException()
-
-    suspend fun editAnuncio(item: Parameters, id: Int): Boolean {
+    override suspend fun editAnuncio(item: Parameters, id: Int): Boolean {
         val anuncioToEdit = Anuncio(
             idMotorhome = item.getOrFail("idMotorHome").toInt(),
             idCriador = item.getOrFail("idCriador").toInt(),
@@ -33,7 +36,7 @@ class AnuncioController: KoinComponent {
         return dbAnuncio.update(anuncioToEdit)
     }
 
-    suspend fun addNewAnuncio(item: Anuncio): Anuncio? {
+    override suspend fun addNewAnuncio(item: Anuncio): Anuncio? {
         if (item.idMotorhome == 0) return null
         if (item.idCriador == 0) return null
         //if (anuncioToAdd.precoAluguel.equals(0.00) || anuncioToAdd.precoCompra.equals(0.00)) return null
@@ -41,5 +44,5 @@ class AnuncioController: KoinComponent {
         return dbAnuncio.insert(item)
     }
 
-    suspend fun remove(id: Int): Boolean = dbAnuncio.delete(id)
+    override suspend fun remove(id: Int): Boolean = dbAnuncio.delete(id)
 }
