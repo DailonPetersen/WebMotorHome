@@ -1,7 +1,16 @@
 # WebMotorHome
 Uma aplicação que permite encontrar e expor seu motorhome ou casa sobre rodas. 
 
-<h2>Video de apresentação</h2>  
+
+<h2>Aplicativo(APK)<h2>
+<p> Disponinibilizado o apk: aplicativo.apk. Comando para instalar: adb install aplicativo.apk</p>
+<p> Caso não possua o ADB é possivel baixa-lo na pasta adb</p>
+
+
+<h2>Video de apresentação pt2</h2>  
+https://www.youtube.com/watch?v=-hnrNba2aGI
+
+<h2>Video de apresentação pt1</h2>  
 https://youtu.be/6ldDw76_gQ0
 
 <h2>Projeto navegável</h2>
